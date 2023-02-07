@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">Help_me</string>
+    <string name="app_name">Help_me
+    </string>
+
+    <string name="some_id">
+
+\u00EC\u009D\u00B4\u00EA\u00B2\u00BD\u00EB\u00AF\u00BC
+</string>
+
 </resources>
