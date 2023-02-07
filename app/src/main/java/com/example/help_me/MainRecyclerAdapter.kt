@@ -1,5 +1,6 @@
 package com.example.help_me
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,14 +8,17 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import java.net.URL
 
-class MainRecyclerAdapter() :
+data class MainItem(val image: Uri?, val title: String, val detail: String, val item: String)
+
+class MainRecyclerAdapter(val itemList: ArrayList<MainItem>) :
     RecyclerView.Adapter<MainRecyclerAdapter.MyViewHolder>() {
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        public var itemimage: ImageView = itemView.findViewById(R.id.item_image)
-        public var itemtitle: TextView = itemView.findViewById(R.id.item_title)
-        public var itemdetail: TextView = itemView.findViewById(R.id.item_detail)
-        public var item: Button = itemView.findViewById<Button>(R.id.and)
+        var itemimage: ImageView = itemView.findViewById(R.id.item_image)
+        var itemtitle: TextView = itemView.findViewById(R.id.item_title)
+        var itemdetail: TextView = itemView.findViewById(R.id.item_detail)
+        var item: Button = itemView.findViewById<Button>(R.id.and)
     }
 
     // 1. Create new views (invoked by the layout manager)
@@ -31,14 +35,14 @@ class MainRecyclerAdapter() :
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         // - get element from your dataset at this position
         // - replace the contents of the view with that element
-        holder.itemimage.setImageResource(R.drawable.baseline_catching_pokemon_24)
-        holder.itemtitle.setText("이경민")
-        holder.itemdetail.setText("개발하기싫어개발하기싫어개발하기싫어개발하기싫어개발하기싫어개발하기싫어개발하기싫어개발하기싫어개발하기싫어개발하기싫어개발하기싫어개발하기싫어")
-        holder.item.setText("And")
+        holder.itemimage.setImageURI(itemList[position].image)
+        holder.itemtitle.text = itemList[position].title
+        holder.itemdetail.text = itemList[position].detail
+        holder.item.text = itemList[position].item
     }
 
     // 3. Return the size of your dataset (invoked by the layout manager)
     override fun getItemCount(): Int {
-        return 10
+        return itemList.count()
     }
 }
